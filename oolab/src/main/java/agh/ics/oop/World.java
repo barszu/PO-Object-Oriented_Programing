@@ -1,32 +1,33 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.MoveDirection;
+
 public class World {
-    public static void main(String[] args) {
+    public static void main(String[] main_args) {
         System.out.println("system wystartowal");
-        run(args);
+
+        OptionsParser optionsParser = new OptionsParser();
+        MoveDirection[] directions = optionsParser.parse(main_args);
+
+        run(directions);
+
         System.out.println("system zakonczyl dzialanie");
 
     }
 
-    public static void run(String[] args){
+    public static void run(MoveDirection[] directions){
         System.out.println("Start");
-//        String to_print = "";
 
-        for(int i=0 ; i< args.length ; i++){
-//            System.out.println(args[i]);
-            switch (args[i]){
-
-                case "f": System.out.println("Zwierzak idzie do przodu"); break;
-                case "b": System.out.println("Zwierzak idzie do tyłu"); break;
-                case "r": System.out.println("Zwierzak skręca w prawo"); break;
-                case "l": System.out.println("Zwierzak skręca w lewo,"); break;
+        for(int i=0 ; i< directions.length ; i++){
+            switch (directions[i]){
+                case FORWARD: System.out.println("Zwierzak idzie do przodu"); break;
+                case BACKWARD: System.out.println("Zwierzak idzie do tyłu"); break;
+                case RIGHT: System.out.println("Zwierzak skręca w prawo"); break;
+                case LEFT: System.out.println("Zwierzak skręca w lewo,"); break;
                 default:
             }
 
-//            to_print += args[i];
-//            if (i < args.length-1){ to_print += ", " ;}
         }
         System.out.println("Stop");
     }
 }
-//krok 16 TODO
