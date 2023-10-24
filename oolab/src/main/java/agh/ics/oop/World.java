@@ -1,5 +1,7 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.MapDirection;
+import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.MoveDirection;
 
 public class World {
@@ -10,6 +12,16 @@ public class World {
         MoveDirection[] directions = optionsParser.parse(main_args);
 
         run(directions);
+
+//        Vector2d position1 = new Vector2d(1,2);
+//        System.out.println(position1);
+//        Vector2d position2 = new Vector2d(-2,1);
+//        System.out.println(position2);
+//        System.out.println(position1.add(position2));
+
+        Vector2d v = MapDirection.EAST.toUnitVector();
+
+        System.out.println(v);
 
         System.out.println("system zakonczyl dzialanie");
 
