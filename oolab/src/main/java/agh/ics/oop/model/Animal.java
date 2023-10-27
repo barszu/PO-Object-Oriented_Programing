@@ -1,4 +1,5 @@
 package agh.ics.oop.model;
+import agh.ics.oop.World; //for WORLD_BORDER
 
 public class Animal {
     private MapDirection direction ;
@@ -24,5 +25,22 @@ public class Animal {
 
     public boolean isAt(Vector2d position){
         return this.position.equals(position);
+    }
+
+    public void move(MoveDirection direction){
+        Vector2d newPosition = null;
+        switch (direction){
+            //changing direction by rotation
+            case RIGHT -> this.direction = this.direction.next();
+            case LEFT -> this.direction = this.direction.previous();
+            //changing position, go forward/backward with no rotation
+            case FORWARD, BACKWARD -> {
+                newPosition = this.position.add(this.direction.toUnitVector());
+            }
+        }
+        //position value has changed, else (-> rotation) do nothing
+        if (newPosition!=null && World.WORLD_BORDER.contains(newPosition)){
+            this.position = newPosition;
+        }
     }
 }

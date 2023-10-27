@@ -4,8 +4,12 @@ import agh.ics.oop.model.Animal;
 import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.MoveDirection;
+import agh.ics.oop.my_package.BorderBox;
 
 public class World {
+
+    public static final BorderBox WORLD_BORDER = new BorderBox();
+
     public static void main(String[] main_args) {
         System.out.println("system wystartowal");
 
@@ -25,7 +29,12 @@ public class World {
 
         Animal Andrzej = new Animal();
         System.out.println(Andrzej.toString());
-
+        Andrzej.move(MoveDirection.BACKWARD);
+        System.out.println(Andrzej.toString());
+        Andrzej.move(MoveDirection.BACKWARD);
+        System.out.println(Andrzej.toString());
+        Andrzej.move(MoveDirection.BACKWARD);
+        System.out.println(Andrzej.toString());
 
 
         System.out.println("system zakonczyl dzialanie");
@@ -43,7 +52,6 @@ public class World {
                 case LEFT: System.out.println("Zwierzak skręca w lewo,"); break;
                 default:
             }
-
         }
         System.out.println("Stop");
     }
