@@ -2,34 +2,26 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.MoveDirection;
 
-import java.util.Arrays;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class OptionsParser {
     // changing input array as str into MoveDirections
-    public static MoveDirection[] parse(String[] args) {
-        MoveDirection[] directions = new MoveDirection[args.length]; //mallock res array
-        int validDirections = 0; //pos to insert in array
+    public static List<MoveDirection> parse(String[] args) {
+        //link list because we will always iterate from begging to end of the list,
+        //we will not pick el from the middle of the list
+        //and maybe in the future that list may be extended
+        List<MoveDirection> directions = new LinkedList<>();
         for (String arg : args) {
             switch (arg) {
-
-                case "f": //"forward"
-                    directions[validDirections] = MoveDirection.FORWARD;
-                    validDirections++;
-                    break;
-                case "b": //"backward":
-                    directions[validDirections] = MoveDirection.BACKWARD;
-                    validDirections++;
-                    break;
-                case "l": // "left":
-                    directions[validDirections] = MoveDirection.LEFT;
-                    validDirections++;
-                    break;
-                case "r": // "right":
-                    directions[validDirections] = MoveDirection.RIGHT;
-                    validDirections++;
-                    break;
+                case "f" -> directions.add(MoveDirection.FORWARD);
+                case "b" -> directions.add(MoveDirection.BACKWARD);
+                case "l" -> directions.add(MoveDirection.LEFT);
+                case "r" -> directions.add(MoveDirection.RIGHT);
+                // default -> do nothing
             }
         }
-        return Arrays.copyOfRange(directions, 0, validDirections);
+        return directions;
     }
 }

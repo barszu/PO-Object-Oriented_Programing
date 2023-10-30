@@ -2,8 +2,19 @@ package agh.ics.oop.model;
 import agh.ics.oop.World; //for WORLD_BORDER
 
 public class Animal {
+
+
     private MapDirection direction ;
     private Vector2d position;
+
+    // for printing use "Zwierzę i : (x ,y)"
+    public Vector2d getPosition() {
+        return position;
+    }
+
+    public MapDirection getDirection() {
+        return direction;
+    }
 
     public Animal(){
         this.direction = MapDirection.NORTH;
@@ -34,9 +45,8 @@ public class Animal {
             case RIGHT -> this.direction = this.direction.next();
             case LEFT -> this.direction = this.direction.previous();
             //changing position, go forward/backward with no rotation
-            case FORWARD, BACKWARD -> {
-                newPosition = this.position.add(this.direction.toUnitVector());
-            }
+            case FORWARD -> newPosition = this.position.add(this.direction.toUnitVector());
+            case BACKWARD -> newPosition = this.position.subtract(this.direction.toUnitVector());
         }
         //position value has changed, else (-> rotation) do nothing
         if (newPosition!=null && World.WORLD_BORDER.contains(newPosition)){
