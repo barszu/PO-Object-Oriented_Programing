@@ -1,6 +1,8 @@
 package agh.ics.oop.model;
 
 import java.util.Objects;
+
+//non mutable
 public class Vector2d {
     private final int x ;
     private final int y ;

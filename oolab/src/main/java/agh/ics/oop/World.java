@@ -1,17 +1,24 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.Animal;
 import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.MoveDirection;
+import agh.ics.oop.my_package.BorderBox;
+
+import java.util.List;
 
 public class World {
+
+    public static final BorderBox WORLD_BORDER = new BorderBox();
+
     public static void main(String[] main_args) {
         System.out.println("system wystartowal");
 
         OptionsParser optionsParser = new OptionsParser();
-        MoveDirection[] directions = optionsParser.parse(main_args);
+        List<MoveDirection> directions = optionsParser.parse(main_args);
 
-        run(directions);
+//        run(directions);
 
 //        Vector2d position1 = new Vector2d(1,2);
 //        System.out.println(position1);
@@ -19,26 +26,38 @@ public class World {
 //        System.out.println(position2);
 //        System.out.println(position1.add(position2));
 
-        Vector2d v = MapDirection.EAST.toUnitVector();
+//        Vector2d v = MapDirection.EAST.toUnitVector();
+//        System.out.println(v);
 
-        System.out.println(v);
+//        Animal Andrzej = new Animal();
+//        System.out.println(Andrzej.toString());
+//        Andrzej.move(MoveDirection.BACKWARD);
+//        System.out.println(Andrzej.toString());
+//        Andrzej.move(MoveDirection.BACKWARD);
+//        System.out.println(Andrzej.toString());
+//        Andrzej.move(MoveDirection.BACKWARD);
+//        System.out.println(Andrzej.toString());
+
+        //5 task
+        List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
+        Simulation simulation = new Simulation(directions, positions);
+        simulation.run();
+
 
         System.out.println("system zakonczyl dzialanie");
 
     }
 
-    public static void run(MoveDirection[] directions){
+    public static void run(List<MoveDirection> directions){
         System.out.println("Start");
 
-        for(int i=0 ; i< directions.length ; i++){
-            switch (directions[i]){
-                case FORWARD: System.out.println("Zwierzak idzie do przodu"); break;
-                case BACKWARD: System.out.println("Zwierzak idzie do tyłu"); break;
-                case RIGHT: System.out.println("Zwierzak skręca w prawo"); break;
-                case LEFT: System.out.println("Zwierzak skręca w lewo,"); break;
-                default:
+        for (MoveDirection direction : directions) {
+            switch (direction) {
+                case FORWARD -> System.out.println("Zwierzak idzie do przodu");
+                case BACKWARD -> System.out.println("Zwierzak idzie do tyłu");
+                case RIGHT -> System.out.println("Zwierzak skręca w prawo");
+                case LEFT -> System.out.println("Zwierzak skręca w lewo,");
             }
-
         }
         System.out.println("Stop");
     }
