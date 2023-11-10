@@ -6,11 +6,13 @@ import agh.ics.oop.model.Animal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+
 public class Simulation {
     private final List<MoveDirection> directionsList; //moves for animals
 
     public List<Animal> getAnimalsList() {
-        return animalsList;
+        return Collections.unmodifiableList(animalsList);
     }
 
     private final List<Animal> animalsList; //animals in the simulation
