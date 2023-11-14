@@ -7,10 +7,9 @@ import agh.ics.oop.my_package.Rectangle;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RectangularMap implements WorldMap{
-
+public class RectangularMap implements WorldMap<Animal, Vector2d>{
     private final Rectangle rectangleBox;
-    private Map<Vector2d,Animal> animals;
+    private final Map<Vector2d,Animal> animals;
     private final int width;
     private final int height;
 
@@ -27,8 +26,7 @@ public class RectangularMap implements WorldMap{
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        //czy mozna tu stanac?
-        return this.rectangleBox.contains(position);
+        return (this.rectangleBox.contains(position)) && (!this.isOccupied(position));
     }
 
     @Override

@@ -18,7 +18,7 @@ public class Simulation {
     private final WorldMap worldMap;
 
     //for rectangular map
-    public Simulation(List<MoveDirection> directionsList , List<Vector2d> positionsList , WorldMap worldMap ){
+    public Simulation(List<MoveDirection> directionsList , List<Vector2d> positionsList , RectangularMap worldMap ){
         this.directionsList = directionsList; //as link list
         this.animalsList = new ArrayList<>(); //as normal list because we will pick el from the middle
         this.worldMap = worldMap;
@@ -52,7 +52,7 @@ public class Simulation {
             }
 
         }
-        //TODO nie printuje sie, nie dziala draw w MapVisualizer
+
         String toprint = this.worldMap.toString();
         System.out.print(toprint);
     }
