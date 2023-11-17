@@ -26,8 +26,11 @@ public class Simulation {
         for (Vector2d position: positionsList){
             if (this.worldMap.canMoveTo(position)){ //pos in bound
                 Animal animal = new Animal(position);
-                animalsList.add(animal);
-                worldMap.place(animal);
+                if (worldMap.place(animal)){
+                    animalsList.add(animal);
+                }
+
+
             }
 
         }
