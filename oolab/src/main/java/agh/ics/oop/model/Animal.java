@@ -7,11 +7,9 @@ public class Animal {
     private MapDirection direction ;
     private Vector2d position;
 
-    // for printing use "Zwierzę i : (x ,y)"
     public Vector2d getPosition() {
         return position;
     }
-
     public MapDirection getDirection() {
         return direction;
     }
@@ -28,18 +26,16 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "Animal{" +
-                "d=" + direction.toString() +
-                ", pos=" + position.toString() +
-                '}';
+//        return "Animal{" + direction.toString() + position.toString() + '}';
+        return direction.toString();
     }
 
     public boolean isAt(Vector2d position){
         return this.position.equals(position);
     }
 
-    public void move(MoveDirection direction){
-        Vector2d newPosition = null;
+    public void move(MoveDirection direction, MoveValidator moveValidator){
+        Vector2d newPosition = this.position;
         switch (direction){
             //changing direction by rotation
             case RIGHT -> this.direction = this.direction.next();
@@ -48,8 +44,7 @@ public class Animal {
             case FORWARD -> newPosition = this.position.add(this.direction.toUnitVector());
             case BACKWARD -> newPosition = this.position.subtract(this.direction.toUnitVector());
         }
-        //position value has changed, else (-> rotation) do nothing
-        if (newPosition!=null && World.WORLD_BORDER.contains(newPosition)){
+        if (moveValidator.canMoveTo(newPosition)){
             this.position = newPosition;
         }
     }

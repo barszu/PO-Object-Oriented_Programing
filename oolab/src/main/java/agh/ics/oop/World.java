@@ -1,16 +1,14 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MapDirection;
+import agh.ics.oop.model.RectangularMap;
 import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.my_package.BorderBox;
+import agh.ics.oop.model.WorldMap;
+import agh.ics.oop.my_package.Rectangle;
 
 import java.util.List;
 
 public class World {
-
-    public static final BorderBox WORLD_BORDER = new BorderBox();
 
     public static void main(String[] main_args) {
         System.out.println("system wystartowal");
@@ -40,7 +38,8 @@ public class World {
 
         //5 task
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
-        Simulation simulation = new Simulation(directions, positions);
+        RectangularMap worldMap = new RectangularMap(5,5);
+        Simulation simulation = new Simulation(directions, positions, worldMap);
         simulation.run();
 
 
