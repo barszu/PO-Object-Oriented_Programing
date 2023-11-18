@@ -1,7 +1,7 @@
 package agh.ics.oop.model;
 import agh.ics.oop.World; //for WORLD_BORDER
 
-public class Animal {
+public class Animal implements WorldElement{
 
 
     private MapDirection direction ;

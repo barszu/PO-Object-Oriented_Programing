@@ -9,7 +9,7 @@ import agh.ics.oop.model.Vector2d;
  *
  * @author apohllo, idzik
  */
-public interface WorldMap<T, P> extends MoveValidator<P> {
+public interface WorldMap<WorldElement, P> extends MoveValidator<P> {
     /**
      * Place a animal on the map.
      *
@@ -17,14 +17,14 @@ public interface WorldMap<T, P> extends MoveValidator<P> {
      * @return True if the animal was placed. The animal cannot be placed if the move is not valid.
      */
 //    boolean place(Animal animal);
-    boolean place(T element);
+    boolean place(WorldElement element);
 
     /**
      * Moves an animal (if it is present on the map) according to specified direction.
      * If the move is not possible, this method has no effect.
      */
 //    void move(Animal animal, MoveDirection direction);
-    void move(T element, MoveDirection direction);
+    void move(WorldElement element, MoveDirection direction);
     /**
      * Return true if given position on the map is occupied. Should not be
      * confused with canMove since there might be empty positions where the animal
@@ -42,7 +42,7 @@ public interface WorldMap<T, P> extends MoveValidator<P> {
      * @return animal or null if the position is not occupied.
      */
 //    Animal objectAt(Vector2d position);
-    T objectAt(P position);
+    WorldElement objectAt(P position);
     @Override
     String toString();
 //    public String toString();
