@@ -56,7 +56,6 @@ public class Simulation {
 
         }
 
-        String toprint = this.worldMap.toString();
-        System.out.print(toprint);
+        System.out.print(this.worldMap.toString());
     }
 }

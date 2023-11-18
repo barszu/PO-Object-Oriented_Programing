@@ -13,15 +13,18 @@ public class RectangularMap implements WorldMap<Animal, Vector2d>{
     private final int width;
     private final int height;
 
+    private final MapVisualizer mapVis;
+
 
     public RectangularMap(int width, int height) {
-        if (width<0 || height<0) {
+        if (width<=0 || height<=0) {
             throw new IllegalArgumentException("invalid width or height in RectangularMap");
         }
         this.animals = new HashMap<>();
         this.width = width;
         this.height = height;
         this.rectangleBox = new Rectangle(new Vector2d(0,0),new Vector2d(width,height));
+        this.mapVis = new MapVisualizer(this);
     }
 
     @Override
@@ -67,8 +70,8 @@ public class RectangularMap implements WorldMap<Animal, Vector2d>{
 
     @Override
     public String toString() {
-        MapVisualizer mapVis = new MapVisualizer(this);
+
 //        return mapVis.draw(new Vector2d(0,this.height) , new Vector2d(this.width , 0));
-        return mapVis.draw(new Vector2d(0 , 0) , new Vector2d(this.width,this.height) );
+        return mapVis.draw(new Vector2d(0 , 0) , new Vector2d(this.width-1,this.height-1) );
     }
 }
