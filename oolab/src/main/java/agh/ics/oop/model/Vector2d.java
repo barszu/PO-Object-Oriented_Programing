@@ -68,42 +68,6 @@ public class Vector2d {
         return new Vector2d(-this.x , -this.y);
    }
 
-//    public Vector2d find(Iterable<Vector2d> iterableObj, Comparator<Vector2d> comparator) {
-//
-//        if (iterableObj == null) {
-//            throw new IllegalArgumentException("Iterable is null in find Vector2d");
-//        }
-//
-//        Vector2d best = null;
-//        for (Vector2d current : iterableObj) {
-//            if (best == null || comparator.compare(current, best) > 0) {
-//                best = current;
-//            }
-//        }
-//        if (best == null) {
-//            throw new IllegalArgumentException("Iterable is empty in find Vector2d");
-//        }
-//        return best;
-//    }
-//
-//    public static class UpLeftComparator implements Comparator<Vector2d> {
-//        @Override
-//        public int compare(Vector2d v1, Vector2d v2) {
-//            boolean v1IsUpLeft = v1.isUpLeftRespectTo(v2);
-//            boolean v2IsUpLeft = v2.isUpLeftRespectTo(v1);
-//
-//
-//            if (v1IsUpLeft && !v2IsUpLeft) {
-//                return 1;  // v1 is more "up-left"
-//            } else if (!v1IsUpLeft && v2IsUpLeft) {
-//                return -1; // v2 is more "up-left"
-//            } else {
-//                return 0;  // oba elementy są albo "up-left", albo nie
-//            }
-//        }
-//
-//    }
-
     public boolean equals(Object other){
        if (this == other)
            return true;

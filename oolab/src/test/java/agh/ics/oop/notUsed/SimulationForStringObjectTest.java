@@ -1,13 +1,13 @@
-package agh.ics.oop.my_package;
+package agh.ics.oop.notUsed;
 
 import agh.ics.oop.OptionsParser;
-import agh.ics.oop.Simulation;
 import agh.ics.oop.model.*;
+import agh.ics.oop.notUsed.SimulationForStringObject;
+import agh.ics.oop.notUsed.StringObject;
+import agh.ics.oop.notUsed.TextMap;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SimulationForStringObjectTest {
 

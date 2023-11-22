@@ -9,22 +9,22 @@ import agh.ics.oop.model.Vector2d;
  *
  * @author apohllo, idzik
  */
-public interface WorldMap<WorldElement, P> extends MoveValidator<P> {
+public interface WorldMap extends MoveValidator {
     /**
      * Place a animal on the map.
      *
      * @param_animal The animal to place on the map.
      * @return True if the animal was placed. The animal cannot be placed if the move is not valid.
      */
-//    boolean place(Animal animal);
-    boolean place(WorldElement element);
+    boolean place(Animal animal);
+//    boolean place(WorldElement element);
 
     /**
      * Moves an animal (if it is present on the map) according to specified direction.
      * If the move is not possible, this method has no effect.
      */
-//    void move(Animal animal, MoveDirection direction);
-    void move(WorldElement element, MoveDirection direction);
+    void move(Animal animal, MoveDirection direction);
+//    void move(WorldElement element, MoveDirection direction);
     /**
      * Return true if given position on the map is occupied. Should not be
      * confused with canMove since there might be empty positions where the animal
@@ -33,16 +33,16 @@ public interface WorldMap<WorldElement, P> extends MoveValidator<P> {
      * @param position Position to check.
      * @return True if the position is occupied.
      */
-//    boolean isOccupied(Vector2d position);
-    boolean isOccupied(P position);
+    boolean isOccupied(Vector2d position);
+//    boolean isOccupied(P position);
     /**
      * Return an animal at a given position.
      *
      * @param position The position of the animal.
      * @return animal or null if the position is not occupied.
      */
-//    Animal objectAt(Vector2d position);
-    WorldElement objectAt(P position);
+    WorldElement objectAt(Vector2d position);
+//    WorldElement objectAt(P position);
     @Override
     String toString();
 //    public String toString();

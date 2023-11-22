@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GrassField implements WorldMap<WorldElement,Vector2d>{
+public class GrassField extends AbstractWorldMap{
 
     private final Map<Vector2d,Grass> grasses = new HashMap<>();
-    private final Map<Vector2d,Animal> animals = new HashMap<>();
 
 
     public GrassField(int grassNo) { //puts grass
+//        super();
         if (grassNo < 0){
             throw new IllegalArgumentException("negative grassNo in GrassField");
         }
@@ -30,57 +30,37 @@ public class GrassField implements WorldMap<WorldElement,Vector2d>{
 
     }
 
-//    TODO umożliwia nieograniczone poruszanie się zwierzęcia po mapie, pod warunkiem, że nie wchodzi na inne zwierzę - rozmiar mapy ma być "nieskończony" (czyli ograniczony tylko możliwościami int-a)
-
     @Override
-    public boolean canMoveTo(Vector2d position) { //as animal
+    public boolean canMoveTo(Vector2d position) { //as animal , changed
         return !this.isOccupied(position);
     }
 
     @Override
-    public boolean place(WorldElement animal) { //as animal
-        //TODO
-        return false;
-    }
+    public WorldElement objectAt(Vector2d position) { //as animal or grass
 
-    @Override
-    public void move(WorldElement animal, MoveDirection direction) { //as animal
-        //TODO
-    }
-
-    @Override
-    public boolean isOccupied(Vector2d position) { //as animal
-        return this.animals.containsKey(position);
-    }
-
-    @Override
-    public Animal objectAt(Vector2d position) { //as animal
-        if (!isOccupied(position)){
-            return null;
+        if (isOccupied(position)){ //by animal
+            return super.animals.get(position); //TODO
         }
-        return this.animals.get(position);
+        if (this.grasses.containsKey(position)){
+            return this.grasses.get(position);
+        }
+        return null;
+
     }
 
     public String toString() {
-        MapVisualizer mapVis = new MapVisualizer(this);
-        if (animals.keySet().size() == 0){ //print of empty map
+        if (animals.keySet().isEmpty()){ //print of empty map //TODO
             return mapVis.draw(new Vector2d(0,0) , new Vector2d(1,1));
         }
-
+        //for animals
         List<Vector2d> positionsList = new ArrayList<>(animals.keySet());
-        Vector2d MOSTtopLeftPoint = positionsList.get(0); // "min"
-        Vector2d MOSTbottomRightPoint = positionsList.get(0); // "max"
+        Vector2d MOSTLowerLeftPoint = positionsList.get(0); // "min"
+        Vector2d MOSTUpperRightPoint = positionsList.get(0); // "max"
         for (Vector2d current : positionsList) {
-            // for "max"
-            if (current.isDownRightRespectTo(MOSTbottomRightPoint)) {
-                MOSTbottomRightPoint = current;
-            }
-            // for "min"
-            else if (current.isUpLeftRespectTo(MOSTtopLeftPoint)) {
-                MOSTtopLeftPoint = current;
-            }
+            MOSTUpperRightPoint = current.upperRight(MOSTUpperRightPoint) ; // for "max"
+            MOSTLowerLeftPoint = current.lowerLeft(MOSTLowerLeftPoint) ; // for "min"
         }
-        return mapVis.draw(MOSTtopLeftPoint , MOSTbottomRightPoint );
+        return mapVis.draw(MOSTLowerLeftPoint , MOSTUpperRightPoint );
     }
 
 }
