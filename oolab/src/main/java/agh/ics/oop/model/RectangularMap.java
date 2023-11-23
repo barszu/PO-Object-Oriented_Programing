@@ -4,12 +4,10 @@ import agh.ics.oop.World;
 import agh.ics.oop.model.util.MapVisualizer;
 import agh.ics.oop.my_package.Rectangle;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class RectangularMap extends AbstractWorldMap{
     private final Rectangle rectangleBox;
-//    private final Map<Vector2d,Animal> animals;
     private final int width;
     private final int height;
 
@@ -25,7 +23,7 @@ public class RectangularMap extends AbstractWorldMap{
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return (this.rectangleBox.contains(position)) && (!this.isOccupied(position));
+        return (this.rectangleBox.contains(position)) && (!super.animals.containsKey(position));
     }
 
     @Override
@@ -33,7 +31,17 @@ public class RectangularMap extends AbstractWorldMap{
         if (!isOccupied(position)){
             return null;
         }
-        return super.animals.get(position); //TODO
+        return super.animals.get(position);
+    }
+
+    @Override
+    public boolean isOccupied(Vector2d position) {//as animal
+        return super.animals.containsKey(position) ;
+    }
+
+    @Override
+    public Collection<WorldElement> getElements() {
+        return Collections.unmodifiableCollection(new ArrayList<>(animals.values()));
     }
 
     @Override

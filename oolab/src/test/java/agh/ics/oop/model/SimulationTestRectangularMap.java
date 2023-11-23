@@ -1,6 +1,7 @@
-package agh.ics.oop;
+package agh.ics.oop.model;
 
-import agh.ics.oop.model.*;
+import agh.ics.oop.OptionsParser;
+import agh.ics.oop.Simulation;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SimulationTest {
+class SimulationTestRectangularMap {
 
     @Test
     void testRun1() { //messy args
@@ -29,6 +30,8 @@ class SimulationTest {
 
         assertEquals(animal2.getDirection(), MapDirection.NORTH);
         assertEquals(animal2.getPosition(), new Vector2d(0, 0) );
+
+        assertEquals(simulation.getAnimalsList().size() , worldMap.getElements().size());
 
 
     }

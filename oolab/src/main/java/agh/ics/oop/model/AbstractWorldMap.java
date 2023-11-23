@@ -2,6 +2,7 @@ package agh.ics.oop.model;
 
 import agh.ics.oop.model.util.MapVisualizer;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,9 +10,6 @@ abstract class AbstractWorldMap implements WorldMap{
 
     protected final Map<Vector2d,Animal> animals = new HashMap<>();
     protected final MapVisualizer mapVis = new MapVisualizer(this);
-
-    @Override
-    abstract public boolean canMoveTo(Vector2d position);
 
     @Override
     public boolean place(Animal animal) { //as animal
@@ -23,7 +21,6 @@ abstract class AbstractWorldMap implements WorldMap{
             return false;
         }
     }
-
 
     @Override
     public void move(Animal animal , MoveDirection direction) { //as animal
@@ -41,7 +38,13 @@ abstract class AbstractWorldMap implements WorldMap{
     }
 
     @Override
+    abstract public boolean canMoveTo(Vector2d position);
+
+    @Override
     abstract public WorldElement objectAt(Vector2d position);
+
+    @Override
+    abstract public Collection<WorldElement> getElements();
 
     @Override
     abstract public String toString();
