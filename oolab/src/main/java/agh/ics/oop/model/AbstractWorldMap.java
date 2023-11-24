@@ -24,12 +24,12 @@ abstract class AbstractWorldMap implements WorldMap{
 
     @Override
     public void move(Animal animal , MoveDirection direction) { //as animal
-        if (!this.animals.containsValue(animal)){
+        if (!animals.containsKey(animal.getPosition())){
             return;
         }
         animals.remove(animal.getPosition());
         animal.move(direction, this);
-        this.place((animal));
+        animals.put(animal.getPosition() , animal);
     }
 
     @Override
@@ -38,10 +38,17 @@ abstract class AbstractWorldMap implements WorldMap{
     }
 
     @Override
-    abstract public boolean canMoveTo(Vector2d position);
+    public boolean canMoveTo(Vector2d position){
+        return !animals.containsKey(position); //colisions with other animals ON
+    }
 
     @Override
-    abstract public WorldElement objectAt(Vector2d position);
+    public WorldElement objectAt(Vector2d position){
+        if (animals.containsKey(position)){ //by animal
+            return animals.get(position);
+        }
+        else return null;
+    }
 
     @Override
     abstract public Collection<WorldElement> getElements();

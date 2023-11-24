@@ -27,16 +27,12 @@ public class GrassField extends AbstractWorldMap{
     }
 
     @Override
-    public boolean canMoveTo(Vector2d position) { //as animal
-        return !super.animals.containsKey(position); //colisions with other animals ON
-    }
-
-    @Override
     public WorldElement objectAt(Vector2d position) { //as animal or grass
-        if (super.animals.containsKey(position)){ //by animal
-            return super.animals.get(position);
+        WorldElement animal = super.objectAt(position);
+        if (animal != null){
+            return animal;
         }
-        if (this.grasses.containsKey(position)){ //otherwise grass
+        if (this.grasses.containsKey(position)){ //otherwise maybe grass
             return this.grasses.get(position);
         }
         return null; //nothing
@@ -56,19 +52,22 @@ public class GrassField extends AbstractWorldMap{
     }
 
     public String toString() {
-        if (animals.keySet().isEmpty()){
+        ArrayList<WorldElement> worldElementsList = new ArrayList<>(this.getElements());
+
+        if (worldElementsList.isEmpty()){
             return mapVis.draw(new Vector2d(0,0) , new Vector2d(1,1));
         }
         //for animals
-        List<Vector2d> positionsList = new ArrayList<>(animals.keySet());
-        Vector2d MOSTLowerLeftPoint = positionsList.get(0); // "min"
-        Vector2d MOSTUpperRightPoint = positionsList.get(0); // "max"
-        for (Vector2d current : positionsList) {
-            MOSTUpperRightPoint = current.upperRight(MOSTUpperRightPoint) ; // for "max"
-            MOSTLowerLeftPoint = current.lowerLeft(MOSTLowerLeftPoint) ; // for "min"
+        Vector2d mostLowerLeftPoint = worldElementsList.get(0).getPosition(); // "min"
+        Vector2d mostUpperRightPoint = worldElementsList.get(0).getPosition(); // "max"
+
+        for (WorldElement worldElement : worldElementsList) {
+            Vector2d currentPos = worldElement.getPosition();
+            mostUpperRightPoint = currentPos.upperRight(mostUpperRightPoint) ; // for "max"
+            mostLowerLeftPoint = currentPos.lowerLeft(mostLowerLeftPoint) ; // for "min"
         }
 
-        return mapVis.draw(MOSTLowerLeftPoint , MOSTUpperRightPoint );
+        return mapVis.draw(mostLowerLeftPoint , mostUpperRightPoint );
     }
 
 }

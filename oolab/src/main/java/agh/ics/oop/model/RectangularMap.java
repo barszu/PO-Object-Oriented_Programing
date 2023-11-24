@@ -23,15 +23,7 @@ public class RectangularMap extends AbstractWorldMap{
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return (this.rectangleBox.contains(position)) && (!super.animals.containsKey(position));
-    }
-
-    @Override
-    public Animal objectAt(Vector2d position) {
-        if (!isOccupied(position)){
-            return null;
-        }
-        return super.animals.get(position);
+        return (this.rectangleBox.contains(position)) && (super.canMoveTo(position));
     }
 
     @Override
