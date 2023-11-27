@@ -27,13 +27,8 @@ public class RectangularMap extends AbstractWorldMap{
     }
 
     @Override
-    public boolean isOccupied(Vector2d position) {//as animal
-        return super.animals.containsKey(position) ;
-    }
-
-    @Override
     public Collection<WorldElement> getElements() {
-        return Collections.unmodifiableCollection(new ArrayList<>(animals.values()));
+        return new ArrayList<>(animals.values());
     }
 
     @Override

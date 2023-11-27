@@ -23,8 +23,12 @@ class OptionsParserTest {
     public void testParseInvalidDirections() {
         String[] args = {"f", "b", "x", "r"};
         List<MoveDirection> expected = List.of(MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.RIGHT);
-        List<MoveDirection> result = OptionsParser.parse(args);
-        assertIterableEquals(expected, result);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            OptionsParser.parse(args);
+        });
+
+        assertTrue(exception.getMessage().contains("'x'" + " is not a legal move specification"));
     }
 
     @Test

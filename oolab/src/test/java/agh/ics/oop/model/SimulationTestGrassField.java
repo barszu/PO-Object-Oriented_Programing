@@ -13,6 +13,7 @@ class SimulationTestGrassField {
 
     @Test
     void testRun1() { //is visualization good?
+        System.out.println("\ntestRun1:");
         String[] args = {"f"};
         List<MoveDirection> movesList = OptionsParser.parse(args);
         List<Vector2d> positionsList = List.of(new Vector2d(2, 2),new Vector2d(10, 0) , new Vector2d(5,5));
@@ -41,6 +42,7 @@ class SimulationTestGrassField {
 
     @Test
     void testRun2() { //stacking animals when spawn?
+        System.out.println("\ntestRun2:");
         String[] args = {"f","f"};
         List<MoveDirection> movesList = OptionsParser.parse(args);
         List<Vector2d> positionsList = List.of(new Vector2d(2, 2),new Vector2d(2, 2));
@@ -63,6 +65,7 @@ class SimulationTestGrassField {
 
     @Test
     void testRun3() { //no border of map check
+        System.out.println("\ntestRun3:");
         String[] args = {"f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f"};
         List<MoveDirection> movesList = OptionsParser.parse(args);
         List<Vector2d> positionsList = List.of(new Vector2d(2, 2) , new Vector2d(20,20));
@@ -84,6 +87,7 @@ class SimulationTestGrassField {
 
     @Test
     void testRun4() { //no animals -> __repr__ = something 2x2 surface
+        System.out.println("\ntestRun4:");
         String[] args = {"f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f"};
         List<MoveDirection> movesList = OptionsParser.parse(args);
         List<Vector2d> positionsList = List.of();
@@ -99,6 +103,7 @@ class SimulationTestGrassField {
 
     @Test
     void testRun5() { //is 20 grasses and 2 animals?
+        System.out.println("\ntestRun5:");
         String[] args = {"f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f"};
         List<MoveDirection> movesList = OptionsParser.parse(args);
         List<Vector2d> positionsList = List.of(new Vector2d(2, 2) , new Vector2d(20,20));

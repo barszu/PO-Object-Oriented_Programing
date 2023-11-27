@@ -48,26 +48,7 @@ public class GrassField extends AbstractWorldMap{
         Collection<WorldElement> elements = new ArrayList<>();
         elements.addAll(grasses.values());
         elements.addAll(animals.values());
-        return Collections.unmodifiableCollection(elements);
-    }
-
-    public String toString() {
-        ArrayList<WorldElement> worldElementsList = new ArrayList<>(this.getElements());
-
-        if (worldElementsList.isEmpty()){
-            return mapVis.draw(new Vector2d(0,0) , new Vector2d(1,1));
-        }
-        //for animals
-        Vector2d mostLowerLeftPoint = worldElementsList.get(0).getPosition(); // "min"
-        Vector2d mostUpperRightPoint = worldElementsList.get(0).getPosition(); // "max"
-
-        for (WorldElement worldElement : worldElementsList) {
-            Vector2d currentPos = worldElement.getPosition();
-            mostUpperRightPoint = currentPos.upperRight(mostUpperRightPoint) ; // for "max"
-            mostLowerLeftPoint = currentPos.lowerLeft(mostLowerLeftPoint) ; // for "min"
-        }
-
-        return mapVis.draw(mostLowerLeftPoint , mostUpperRightPoint );
+        return elements;
     }
 
 }

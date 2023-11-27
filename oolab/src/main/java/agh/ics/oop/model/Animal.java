@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 import agh.ics.oop.World; //for WORLD_BORDER
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 
 public class Animal implements WorldElement{
 
@@ -34,7 +35,7 @@ public class Animal implements WorldElement{
         return this.position.equals(position);
     }
 
-    public void move(MoveDirection direction, MoveValidator moveValidator){
+    public void move(MoveDirection direction, MoveValidator moveValidator) throws PositionAlreadyOccupiedException{
         Vector2d newPosition = this.position;
         switch (direction){
             //changing direction by rotation
@@ -46,6 +47,10 @@ public class Animal implements WorldElement{
         }
         if (moveValidator.canMoveTo(newPosition)){
             this.position = newPosition;
+        }
+        else {
+            throw new PositionAlreadyOccupiedException(newPosition);
+            // without changing position!
         }
     }
 }

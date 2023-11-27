@@ -13,7 +13,9 @@ class SimulationTestRectangularMap {
 
     @Test
     void testRun1() { //messy args
-        String[] args = {"f", "b", "l", "r","b","l","r","x","x"};
+        System.out.println("\ntestRun1:");
+//        String[] args = {"f", "b", "l", "r","b","l","r","x","x"};
+        String[] args = {"f", "b", "l", "r","b","l","r"};
         List<MoveDirection> movesList = OptionsParser.parse(args);
         List<Vector2d> positionsList = List.of(new Vector2d(2, 2),new Vector2d(0, 0));
         RectangularMap worldMap = new RectangularMap(5,5);
@@ -38,6 +40,7 @@ class SimulationTestRectangularMap {
 
     @Test
     void testRun2() { //no args
+        System.out.println("\ntestRun2:");
         String[] args = {};
         List<MoveDirection> movesList = OptionsParser.parse(args);
         List<Vector2d> positionsList = List.of(new Vector2d(2, 2),new Vector2d(0, 0));
@@ -61,6 +64,7 @@ class SimulationTestRectangularMap {
 
     @Test
     void testRun3() { //border blocking check
+        System.out.println("\ntestRun3:");
         String[] args = {"f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f",};
         List<MoveDirection> movesList = OptionsParser.parse(args);
         List<Vector2d> positionsList = List.of(new Vector2d(2, 2));
@@ -78,6 +82,7 @@ class SimulationTestRectangularMap {
 
     @Test
     void testRun4() { //no animals
+        System.out.println("\ntestRun4:");
         String[] args = {"f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f"};
         List<MoveDirection> movesList = OptionsParser.parse(args);
         List<Vector2d> positionsList = List.of();
@@ -92,6 +97,7 @@ class SimulationTestRectangularMap {
 
     @Test
     void testRun5() { //weird rectangle, no animals added to map
+        System.out.println("\ntestRun5:");
         String[] args = {"f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","l"};
         List<MoveDirection> movesList = OptionsParser.parse(args);
         List<Vector2d> positionsList = List.of(new Vector2d(2, 2));
@@ -107,6 +113,7 @@ class SimulationTestRectangularMap {
 
     @Test
     void testRun6() { //weird rectangle, box borders not soft check
+        System.out.println("\ntestRun6:");
         String[] args = {"f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","l"};
         List<MoveDirection> movesList = OptionsParser.parse(args);
         List<Vector2d> positionsList = List.of(new Vector2d(1, 1));
@@ -125,6 +132,7 @@ class SimulationTestRectangularMap {
 
     @Test
     void testRun7() { //rectangle with 0 width, box borders not soft check
+        System.out.println("\ntestRun7:");
         String[] args = {"f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","l"};
         List<MoveDirection> movesList = OptionsParser.parse(args);
         List<Vector2d> positionsList = List.of(new Vector2d(0, 1));
@@ -143,6 +151,7 @@ class SimulationTestRectangularMap {
 
     @Test
     void testRun8() { //rectangle with negative width
+        System.out.println("\ntestRun8:");
         String[] args = {"f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","l"};
         List<MoveDirection> movesList = OptionsParser.parse(args);
         List<Vector2d> positionsList = List.of(new Vector2d(-1, 1));
@@ -158,7 +167,9 @@ class SimulationTestRectangularMap {
 
     @Test
     void testRun9() { //animals stacking on each other on spawn
-        String[] args = {"f", "b", "l", "r","b","l","r","x","x"};
+        System.out.println("\ntestRun9:");
+        String[] args = {"f", "b", "l", "r","b","l","r"};
+//        String[] args = {"f", "b", "l", "r","b","l","r","x","x"};
         List<MoveDirection> movesList = OptionsParser.parse(args);
         List<Vector2d> positionsList = List.of(new Vector2d(2, 2),new Vector2d(2, 2));
         RectangularMap worldMap = new RectangularMap(5,5);

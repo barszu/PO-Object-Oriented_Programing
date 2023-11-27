@@ -2,8 +2,12 @@ package agh.ics.oop.model;
 
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
+import agh.ics.oop.model.listeners_observers.MapChangeListener;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * The interface responsible for interacting with the map of the world.
@@ -18,7 +22,7 @@ public interface WorldMap extends MoveValidator {
      * @param_animal The animal to place on the map.
      * @return True if the animal was placed. The animal cannot be placed if the move is not valid.
      */
-    boolean place(Animal animal);
+    void place(Animal animal) throws PositionAlreadyOccupiedException;
 //    boolean place(WorldElement element);
 
     /**
@@ -50,4 +54,11 @@ public interface WorldMap extends MoveValidator {
 //    public String toString();
 
     Collection<WorldElement> getElements();
+
+    Boundary getCurrentBounds();
+
+    //observers
+    void addObserver(MapChangeListener observer);
+    void removeObserver(MapChangeListener observer);
+
 }

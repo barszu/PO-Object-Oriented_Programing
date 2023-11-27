@@ -1,6 +1,8 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.*;
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
+import agh.ics.oop.model.listeners_observers.ConsoleMapDisplay;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +25,16 @@ public class Simulation {
         this.animalsList = new ArrayList<>(); //as normal list because we will pick el from the middle
         this.worldMap = worldMap;
 
-        for (Vector2d position: positionsList){
-            if (this.worldMap.canMoveTo(position)){ //pos in bound
-                Animal animal = new Animal(position);
-                if (worldMap.place(animal)){
-                    animalsList.add(animal);
-                }
+        this.worldMap.addObserver(new ConsoleMapDisplay());
 
+        for (Vector2d position: positionsList){
+            Animal animal = new Animal(position);
+            try {
+                worldMap.place(animal);
+                animalsList.add(animal);
+            } catch (PositionAlreadyOccupiedException e) {
+                //nothing to do
+                System.out.println("WARNING: (Animal placing was skipped) when placing Animal: " + e.getMessage());
 
             }
 
@@ -46,7 +51,7 @@ public class Simulation {
             this.worldMap.move(animal,direction);
 //            System.out.print(this.worldMap.toString());
 
-            System.out.println("Zwierze %d: %s".formatted(animalIdx , animal.toString() ));
+//            System.out.println("Zwierze %d: %s".formatted(animalIdx , animal.toString() ));
 //            System.out.println("Zwierze %d: %s".formatted(animalIdx , animalReference.getPosition().toString() ));
 
             animalIdx ++ ;
@@ -57,6 +62,6 @@ public class Simulation {
         }
 
 
-        System.out.print(this.worldMap.toString());
+//        System.out.print(this.worldMap.toString());
     }
 }

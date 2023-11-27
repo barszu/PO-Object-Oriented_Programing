@@ -1,10 +1,10 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
+import agh.ics.oop.model.listeners_observers.MapChangeListener;
 import agh.ics.oop.model.util.MapVisualizer;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 abstract class AbstractWorldMap implements WorldMap{
 
@@ -12,13 +12,13 @@ abstract class AbstractWorldMap implements WorldMap{
     protected final MapVisualizer mapVis = new MapVisualizer(this);
 
     @Override
-    public boolean place(Animal animal) { //as animal
-        if (this.canMoveTo(animal.getPosition())){  //popraw przy zmianie canMoveTo
+    public void place(Animal animal) throws PositionAlreadyOccupiedException { //as animal
+        if (canMoveTo(animal.getPosition())){  //popraw przy zmianie canMoveTo
             this.animals.put(animal.getPosition() , animal);
-            return true;
+            mapChanged(String.format("Animal: '%s' has been placed on '%s'",animal,animal.getPosition()));
         }
         else { //animal position out of map for example
-            return false;
+            throw new PositionAlreadyOccupiedException(animal.getPosition());
         }
     }
 
@@ -28,13 +28,29 @@ abstract class AbstractWorldMap implements WorldMap{
             return;
         }
         animals.remove(animal.getPosition());
-        animal.move(direction, this);
-        animals.put(animal.getPosition() , animal);
+        try {
+            Vector2d oldAnimalPos = animal.getPosition();
+            animal.move(direction, this);
+            animals.put(animal.getPosition() , animal);
+            mapChanged(String.format("Animal: '%s' has been moved from '%s' to '%s'",animal,oldAnimalPos,animal.getPosition()));
+//            //notify observers when Animal has changed pos not orientation
+//            if (!oldAnimalPos.equals(animal.getPosition())){
+//                mapChanged(String.format("Animal: '%s' has been moved from '%s' to '%s'",animal,oldAnimalPos,animal.getPosition()));
+//            }
+
+
+        } catch (PositionAlreadyOccupiedException e){
+            // nothing to do!
+            animals.put(animal.getPosition() , animal);
+            System.out.println("WARNING (Animal move was skipped and position not modified): When moving Animal: " + e.getMessage());
+        }
+
+//        animals.put(animal.getPosition() , animal);
     }
 
     @Override
     public boolean isOccupied(Vector2d position) {//as animal
-        return this.animals.containsKey(position);
+        return animals.containsKey(position);
     }
 
     @Override
@@ -51,8 +67,51 @@ abstract class AbstractWorldMap implements WorldMap{
     }
 
     @Override
-    abstract public Collection<WorldElement> getElements();
+    public Boundary getCurrentBounds(){
+        ArrayList<WorldElement> worldElementsList = new ArrayList<>(getElements());
+
+        if (worldElementsList.isEmpty()){
+            return null;
+        }
+
+        Vector2d mostLowerLeftPoint = worldElementsList.get(0).getPosition(); // "min"
+        Vector2d mostUpperRightPoint = worldElementsList.get(0).getPosition(); // "max"
+
+        for (WorldElement worldElement : worldElementsList) {
+            Vector2d currentPos = worldElement.getPosition();
+            mostUpperRightPoint = currentPos.upperRight(mostUpperRightPoint) ; // for "max"
+            mostLowerLeftPoint = currentPos.lowerLeft(mostLowerLeftPoint) ; // for "min"
+        }
+        return new Boundary(mostLowerLeftPoint , mostUpperRightPoint);
+    }
 
     @Override
-    abstract public String toString();
+    public String toString() {
+        Boundary mapBoundaryRepr = getCurrentBounds();
+        if (mapBoundaryRepr == null){ //some __repr__
+            return mapVis.draw(new Vector2d(0,0),new Vector2d(1,1));
+        }
+        return mapVis.draw(mapBoundaryRepr.lowerLeft() , mapBoundaryRepr.topRight() );
+    }
+
+    @Override
+    abstract public Collection<WorldElement> getElements();
+
+
+    // observers section
+    private List<MapChangeListener> observersList = new ArrayList<>();
+    @Override
+    public void addObserver(MapChangeListener observer) {observersList.add(observer);}
+    @Override
+    public void removeObserver(MapChangeListener observer) {observersList.remove(observer);}
+
+    protected void mapChanged(String description) {
+        //notify all observers
+        for (MapChangeListener observer : observersList) {
+            observer.mapChanged(this , description);
+        }
+
+    }
+
+
 }
