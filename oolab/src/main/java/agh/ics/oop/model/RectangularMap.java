@@ -26,10 +26,10 @@ public class RectangularMap extends AbstractWorldMap{
         return (this.rectangleBox.contains(position)) && (super.canMoveTo(position));
     }
 
-    @Override
-    public Collection<WorldElement> getElements() {
-        return new ArrayList<>(animals.values());
-    }
+//    @Override
+//    public Collection<WorldElement> getElements() {
+//        return new ArrayList<>(animals.values());
+//    }
 
     @Override
     public String toString() {

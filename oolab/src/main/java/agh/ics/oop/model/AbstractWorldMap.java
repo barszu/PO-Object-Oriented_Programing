@@ -10,6 +10,7 @@ abstract class AbstractWorldMap implements WorldMap{
 
     protected final Map<Vector2d,Animal> animals = new HashMap<>();
     protected final MapVisualizer mapVis = new MapVisualizer(this);
+    private final List<MapChangeListener> observersList = new ArrayList<>();
 
     @Override
     public void place(Animal animal) throws PositionAlreadyOccupiedException { //as animal
@@ -67,39 +68,13 @@ abstract class AbstractWorldMap implements WorldMap{
     }
 
     @Override
-    public Boundary getCurrentBounds(){
-        ArrayList<WorldElement> worldElementsList = new ArrayList<>(getElements());
-
-        if (worldElementsList.isEmpty()){
-            return null;
-        }
-
-        Vector2d mostLowerLeftPoint = worldElementsList.get(0).getPosition(); // "min"
-        Vector2d mostUpperRightPoint = worldElementsList.get(0).getPosition(); // "max"
-
-        for (WorldElement worldElement : worldElementsList) {
-            Vector2d currentPos = worldElement.getPosition();
-            mostUpperRightPoint = currentPos.upperRight(mostUpperRightPoint) ; // for "max"
-            mostLowerLeftPoint = currentPos.lowerLeft(mostLowerLeftPoint) ; // for "min"
-        }
-        return new Boundary(mostLowerLeftPoint , mostUpperRightPoint);
+    public Collection<WorldElement> getElements(){
+        return new ArrayList<>(animals.values());
     }
-
-    @Override
-    public String toString() {
-        Boundary mapBoundaryRepr = getCurrentBounds();
-        if (mapBoundaryRepr == null){ //some __repr__
-            return mapVis.draw(new Vector2d(0,0),new Vector2d(1,1));
-        }
-        return mapVis.draw(mapBoundaryRepr.lowerLeft() , mapBoundaryRepr.topRight() );
-    }
-
-    @Override
-    abstract public Collection<WorldElement> getElements();
 
 
     // observers section
-    private List<MapChangeListener> observersList = new ArrayList<>();
+
     @Override
     public void addObserver(MapChangeListener observer) {observersList.add(observer);}
     @Override

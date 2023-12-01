@@ -43,11 +43,39 @@ public class GrassField extends AbstractWorldMap{
         return (super.animals.containsKey(position)) || (this.grasses.containsKey(position)) ;
     }
 
+//    @Override
+    public Boundary getCurrentBounds(){ //only for GrassField
+        ArrayList<WorldElement> worldElementsList = new ArrayList<>(getElements());
+
+        if (worldElementsList.isEmpty()){
+            return null;
+        }
+
+        Vector2d mostLowerLeftPoint = worldElementsList.get(0).getPosition(); // "min"
+        Vector2d mostUpperRightPoint = worldElementsList.get(0).getPosition(); // "max"
+
+        for (WorldElement worldElement : worldElementsList) {
+            Vector2d currentPos = worldElement.getPosition();
+            mostUpperRightPoint = currentPos.upperRight(mostUpperRightPoint) ; // for "max"
+            mostLowerLeftPoint = currentPos.lowerLeft(mostLowerLeftPoint) ; // for "min"
+        }
+        return new Boundary(mostLowerLeftPoint , mostUpperRightPoint);
+    }
+
+    @Override
+    public String toString() {
+        Boundary mapBoundaryRepr = getCurrentBounds();
+        if (mapBoundaryRepr == null){ //some __repr__
+            return mapVis.draw(new Vector2d(0,0),new Vector2d(1,1));
+        }
+        return mapVis.draw(mapBoundaryRepr.lowerLeft() , mapBoundaryRepr.topRight() );
+    }
+
     @Override
     public Collection<WorldElement> getElements() {
-        Collection<WorldElement> elements = new ArrayList<>();
+        Collection<WorldElement> elements = super.getElements();
         elements.addAll(grasses.values());
-        elements.addAll(animals.values());
+//        elements.addAll(animals.values());
         return elements;
     }
 
