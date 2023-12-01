@@ -62,14 +62,14 @@ public class GrassField extends AbstractWorldMap{
         return new Boundary(mostLowerLeftPoint , mostUpperRightPoint);
     }
 
-    @Override
-    public String toString() {
-        Boundary mapBoundaryRepr = getCurrentBounds();
-        if (mapBoundaryRepr == null){ //some __repr__
-            return mapVis.draw(new Vector2d(0,0),new Vector2d(1,1));
-        }
-        return mapVis.draw(mapBoundaryRepr.lowerLeft() , mapBoundaryRepr.topRight() );
-    }
+//    @Override
+//    public String toString() {
+//        Boundary mapBoundaryRepr = getCurrentBounds();
+//        if (mapBoundaryRepr == null){ //some __repr__
+//            return mapVis.draw(new Vector2d(0,0),new Vector2d(1,1));
+//        }
+//        return mapVis.draw(mapBoundaryRepr.lowerLeft() , mapBoundaryRepr.topRight() );
+//    }
 
     @Override
     public Collection<WorldElement> getElements() {

@@ -72,6 +72,17 @@ abstract class AbstractWorldMap implements WorldMap{
         return new ArrayList<>(animals.values());
     }
 
+    @Override
+    public abstract Boundary getCurrentBounds();
+
+    @Override
+    public String toString() {
+        Boundary mapBoundaryRepr = getCurrentBounds();
+        if (mapBoundaryRepr == null){ //some __repr__
+            return mapVis.draw(new Vector2d(0,0),new Vector2d(1,1));
+        }
+        return mapVis.draw(mapBoundaryRepr.lowerLeft() , mapBoundaryRepr.topRight() );
+    }
 
     // observers section
 

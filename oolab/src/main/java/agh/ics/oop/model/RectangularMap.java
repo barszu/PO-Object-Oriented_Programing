@@ -18,7 +18,7 @@ public class RectangularMap extends AbstractWorldMap{
         }
         this.width = width;
         this.height = height;
-        this.rectangleBox = new Rectangle(new Vector2d(0,0),new Vector2d(width,height));
+        this.rectangleBox = new Rectangle(new Vector2d(0,0),new Vector2d(width,height)); //archaik
     }
 
     @Override
@@ -26,13 +26,18 @@ public class RectangularMap extends AbstractWorldMap{
         return (this.rectangleBox.contains(position)) && (super.canMoveTo(position));
     }
 
+    @Override
+    public Boundary getCurrentBounds(){
+        return new Boundary(new Vector2d(0,0),new Vector2d(width,height));
+    }
+
 //    @Override
 //    public Collection<WorldElement> getElements() {
 //        return new ArrayList<>(animals.values());
 //    }
 
-    @Override
-    public String toString() {
-        return mapVis.draw(new Vector2d(0 , 0) , new Vector2d(this.width,this.height) );
-    }
+//    @Override
+//    public String toString() {
+//        return mapVis.draw(new Vector2d(0 , 0) , new Vector2d(this.width,this.height) );
+//    }
 }
