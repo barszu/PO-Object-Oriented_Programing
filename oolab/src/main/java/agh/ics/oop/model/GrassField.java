@@ -1,16 +1,19 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.model.util.MapVisualizer;
+import agh.ics.oop.model.models.Grass;
+import agh.ics.oop.model.models.Vector2d;
+import agh.ics.oop.model.models.WorldElement;
 import agh.ics.oop.my_package.RandomPositionGenerator;
 
 import java.util.*;
 
 public class GrassField extends AbstractWorldMap{
 
-    private final Map<Vector2d,Grass> grasses = new HashMap<>();
+    private final Map<Vector2d, Grass> grasses = new HashMap<>();
 
 
     public GrassField(int grassNo) { //puts grass
+        super(UUID.randomUUID());
         if (grassNo < 0){
             throw new IllegalArgumentException("negative grassNo in GrassField");
         }
@@ -62,20 +65,10 @@ public class GrassField extends AbstractWorldMap{
         return new Boundary(mostLowerLeftPoint , mostUpperRightPoint);
     }
 
-//    @Override
-//    public String toString() {
-//        Boundary mapBoundaryRepr = getCurrentBounds();
-//        if (mapBoundaryRepr == null){ //some __repr__
-//            return mapVis.draw(new Vector2d(0,0),new Vector2d(1,1));
-//        }
-//        return mapVis.draw(mapBoundaryRepr.lowerLeft() , mapBoundaryRepr.topRight() );
-//    }
-
     @Override
     public Collection<WorldElement> getElements() {
         Collection<WorldElement> elements = super.getElements();
         elements.addAll(grasses.values());
-//        elements.addAll(animals.values());
         return elements;
     }
 

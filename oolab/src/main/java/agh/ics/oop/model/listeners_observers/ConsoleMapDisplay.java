@@ -1,5 +1,7 @@
 package agh.ics.oop.model.listeners_observers;
 
+import agh.ics.oop.model.GrassField;
+import agh.ics.oop.model.RectangularMap;
 import agh.ics.oop.model.WorldMap;
 
 public class ConsoleMapDisplay implements MapChangeListener {
@@ -10,6 +12,12 @@ public class ConsoleMapDisplay implements MapChangeListener {
     public void mapChanged(WorldMap worldMap, String message) {
 
         System.out.println(message);
+        System.out.println("UUID: " + worldMap.getId());
+
+        //only for better visualization
+        String mapTypeName = worldMap.getClass().getSimpleName();
+        System.out.println("Map Type: " + mapTypeName);
+
         System.out.print(worldMap);
         updateCounter += 1;
     }

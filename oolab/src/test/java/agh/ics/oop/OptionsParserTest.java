@@ -1,6 +1,6 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.MoveDirection;
+import agh.ics.oop.model.models.MoveDirection;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 class OptionsParserTest {
     @Test

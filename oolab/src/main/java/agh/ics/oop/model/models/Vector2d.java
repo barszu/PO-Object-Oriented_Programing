@@ -1,7 +1,5 @@
-package agh.ics.oop.model;
+package agh.ics.oop.model.models;
 
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.Objects;
 
 //non mutable

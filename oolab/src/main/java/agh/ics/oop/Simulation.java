@@ -3,12 +3,15 @@ package agh.ics.oop;
 import agh.ics.oop.model.*;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import agh.ics.oop.model.listeners_observers.ConsoleMapDisplay;
+import agh.ics.oop.model.models.Animal;
+import agh.ics.oop.model.models.MoveDirection;
+import agh.ics.oop.model.models.Vector2d;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
-public class Simulation {
+public class Simulation extends Thread {
     private final List<MoveDirection> directionsList; //moves for animals
 
     public List<Animal> getAnimalsList() {

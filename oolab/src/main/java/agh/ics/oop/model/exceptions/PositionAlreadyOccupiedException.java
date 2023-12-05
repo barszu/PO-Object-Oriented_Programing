@@ -1,6 +1,6 @@
 package agh.ics.oop.model.exceptions;
 
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.models.Vector2d;
 
 public class PositionAlreadyOccupiedException extends Exception{
 

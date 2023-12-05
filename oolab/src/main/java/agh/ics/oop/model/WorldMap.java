@@ -1,13 +1,14 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.models.Animal;
+import agh.ics.oop.model.models.MoveDirection;
+import agh.ics.oop.model.models.Vector2d;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import agh.ics.oop.model.listeners_observers.MapChangeListener;
+import agh.ics.oop.model.models.WorldElement;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.UUID;
 
 /**
  * The interface responsible for interacting with the map of the world.
@@ -51,7 +52,6 @@ public interface WorldMap extends MoveValidator {
 //    WorldElement objectAt(P position);
     @Override
     String toString();
-//    public String toString();
 
     Collection<WorldElement> getElements();
 
@@ -60,5 +60,7 @@ public interface WorldMap extends MoveValidator {
     //observers
     void addObserver(MapChangeListener observer);
     void removeObserver(MapChangeListener observer);
+
+    UUID getId();
 
 }

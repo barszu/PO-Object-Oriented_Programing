@@ -1,10 +1,9 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.World;
-import agh.ics.oop.model.util.MapVisualizer;
+import agh.ics.oop.model.models.Vector2d;
 import agh.ics.oop.my_package.Rectangle;
 
-import java.util.*;
+import java.util.UUID;
 
 public class RectangularMap extends AbstractWorldMap{
     private final Rectangle rectangleBox;
@@ -13,6 +12,7 @@ public class RectangularMap extends AbstractWorldMap{
 
 
     public RectangularMap(int width, int height) {
+        super(UUID.randomUUID());
         if (width<0 || height<0) {
             throw new IllegalArgumentException("invalid width or height in RectangularMap");
         }
@@ -31,13 +31,5 @@ public class RectangularMap extends AbstractWorldMap{
         return new Boundary(new Vector2d(0,0),new Vector2d(width,height));
     }
 
-//    @Override
-//    public Collection<WorldElement> getElements() {
-//        return new ArrayList<>(animals.values());
-//    }
 
-//    @Override
-//    public String toString() {
-//        return mapVis.draw(new Vector2d(0 , 0) , new Vector2d(this.width,this.height) );
-//    }
 }

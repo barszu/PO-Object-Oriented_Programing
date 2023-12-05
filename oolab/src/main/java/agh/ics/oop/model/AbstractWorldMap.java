@@ -2,15 +2,30 @@ package agh.ics.oop.model;
 
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import agh.ics.oop.model.listeners_observers.MapChangeListener;
+import agh.ics.oop.model.models.Animal;
+import agh.ics.oop.model.models.MoveDirection;
+import agh.ics.oop.model.models.Vector2d;
+import agh.ics.oop.model.models.WorldElement;
 import agh.ics.oop.model.util.MapVisualizer;
 
 import java.util.*;
 
 abstract class AbstractWorldMap implements WorldMap{
 
-    protected final Map<Vector2d,Animal> animals = new HashMap<>();
+    protected final Map<Vector2d, Animal> animals = new HashMap<>();
     protected final MapVisualizer mapVis = new MapVisualizer(this);
     private final List<MapChangeListener> observersList = new ArrayList<>();
+
+    protected final UUID id;
+
+    public AbstractWorldMap(UUID id){
+        this.id = id;
+    }
+
+    @Override
+    public UUID getId() {
+        return id;
+    }
 
     @Override
     public void place(Animal animal) throws PositionAlreadyOccupiedException { //as animal
@@ -34,10 +49,6 @@ abstract class AbstractWorldMap implements WorldMap{
             animal.move(direction, this);
             animals.put(animal.getPosition() , animal);
             mapChanged(String.format("Animal: '%s' has been moved from '%s' to '%s'",animal,oldAnimalPos,animal.getPosition()));
-//            //notify observers when Animal has changed pos not orientation
-//            if (!oldAnimalPos.equals(animal.getPosition())){
-//                mapChanged(String.format("Animal: '%s' has been moved from '%s' to '%s'",animal,oldAnimalPos,animal.getPosition()));
-//            }
 
 
         } catch (PositionAlreadyOccupiedException e){
@@ -45,8 +56,6 @@ abstract class AbstractWorldMap implements WorldMap{
             animals.put(animal.getPosition() , animal);
             System.out.println("WARNING (Animal move was skipped and position not modified): When moving Animal: " + e.getMessage());
         }
-
-//        animals.put(animal.getPosition() , animal);
     }
 
     @Override

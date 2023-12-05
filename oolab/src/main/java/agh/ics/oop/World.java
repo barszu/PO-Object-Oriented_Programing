@@ -1,14 +1,15 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.GrassField;
 import agh.ics.oop.model.RectangularMap;
-import agh.ics.oop.model.Vector2d;
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.WorldMap;
-import agh.ics.oop.my_package.Rectangle;
+import agh.ics.oop.model.listeners_observers.ConsoleMapDisplay;
+import agh.ics.oop.model.models.Vector2d;
+import agh.ics.oop.model.models.MoveDirection;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class World {
+public class World extends Thread{
 
     public static void main(String[] main_args) {
         System.out.println("system wystartowal");
@@ -16,32 +17,28 @@ public class World {
         OptionsParser optionsParser = new OptionsParser();
         List<MoveDirection> directions = optionsParser.parse(main_args);
 
-//        run(directions);
-
-//        Vector2d position1 = new Vector2d(1,2);
-//        System.out.println(position1);
-//        Vector2d position2 = new Vector2d(-2,1);
-//        System.out.println(position2);
-//        System.out.println(position1.add(position2));
-
-//        Vector2d v = MapDirection.EAST.toUnitVector();
-//        System.out.println(v);
-
-//        Animal Andrzej = new Animal();
-//        System.out.println(Andrzej.toString());
-//        Andrzej.move(MoveDirection.BACKWARD);
-//        System.out.println(Andrzej.toString());
-//        Andrzej.move(MoveDirection.BACKWARD);
-//        System.out.println(Andrzej.toString());
-//        Andrzej.move(MoveDirection.BACKWARD);
-//        System.out.println(Andrzej.toString());
-
-        //5 task
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
-        RectangularMap worldMap = new RectangularMap(5,5);
-        Simulation simulation = new Simulation(directions, positions, worldMap);
-        simulation.run();
 
+//        RectangularMap worldMap = new RectangularMap(5,5);
+//        Simulation simulation = new Simulation(directions, positions, worldMap);
+//        simulation.run();
+
+        ArrayList<Simulation> simulations = new ArrayList<Simulation>();
+        //GrassField Generator
+        for(int i = 0; i < 3000; i++) {
+            GrassField mapGrassField = new GrassField(10);
+            simulations.add(new Simulation(directions, positions, mapGrassField));
+        }
+        //RectangularMap Generator
+        for(int i = 0; i < 1; i++) {
+            RectangularMap mapRectangularMap = new RectangularMap(10, 10);
+            simulations.add(new Simulation(directions, positions, mapRectangularMap));
+        }
+
+//        SimulationEngine
+        SimulationEngine engine = new SimulationEngine(simulations);
+//        engine.runASync();
+        engine.runAsyncInThreadPool();
 
         System.out.println("system zakonczyl dzialanie");
 

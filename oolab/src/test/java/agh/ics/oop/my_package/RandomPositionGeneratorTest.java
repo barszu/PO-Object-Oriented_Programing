@@ -1,9 +1,7 @@
 package agh.ics.oop.my_package;
 
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.models.Vector2d;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class RandomPositionGeneratorTest {//pseudotesty
 

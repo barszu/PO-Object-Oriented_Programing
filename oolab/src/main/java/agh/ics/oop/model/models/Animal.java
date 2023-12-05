@@ -1,5 +1,5 @@
-package agh.ics.oop.model;
-import agh.ics.oop.World; //for WORLD_BORDER
+package agh.ics.oop.model.models;
+import agh.ics.oop.model.MoveValidator;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 
 public class Animal implements WorldElement{

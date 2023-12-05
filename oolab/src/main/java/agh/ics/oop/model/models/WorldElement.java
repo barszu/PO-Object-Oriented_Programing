@@ -1,4 +1,4 @@
-package agh.ics.oop.model;
+package agh.ics.oop.model.models;
 
 public interface WorldElement {
     Vector2d getPosition();

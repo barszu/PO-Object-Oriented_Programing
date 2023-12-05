@@ -2,7 +2,10 @@ package agh.ics.oop.model;
 
 import agh.ics.oop.OptionsParser;
 import agh.ics.oop.Simulation;
-import agh.ics.oop.model.*;
+import agh.ics.oop.model.models.Animal;
+import agh.ics.oop.model.models.MapDirection;
+import agh.ics.oop.model.models.MoveDirection;
+import agh.ics.oop.model.models.Vector2d;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
