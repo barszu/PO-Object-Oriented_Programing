@@ -1,4 +1,4 @@
-package agh.ics.oop.model.listeners_observers;
+package agh.ics.oop.model.observers;
 
 import agh.ics.oop.model.WorldMap;
 

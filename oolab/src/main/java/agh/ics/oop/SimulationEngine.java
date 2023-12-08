@@ -6,7 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class SimulationEngine {
-    private ArrayList<Simulation> simulations;
+    private final ArrayList<Simulation> simulations;
     SimulationEngine(ArrayList<Simulation> simulations) {
         this.simulations = simulations;
     }
@@ -18,15 +18,14 @@ public class SimulationEngine {
     }
     public synchronized void runASync() {
         for(Simulation simulation : this.simulations) {
-            Thread simulationThread = new Thread(simulation);
-            simulationThread.start();
-            awaitSimulationsEnd(simulationThread);
+            simulation.start();
+            awaitSimulationsEnd(simulation);
         }
     }
 
-    public void awaitSimulationsEnd(Thread thread) {
+    public void awaitSimulationsEnd(Simulation simulation) {
         try {
-            thread.join();
+            simulation.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -40,7 +39,7 @@ public class SimulationEngine {
         executorService.shutdown();
         try {
             if (!executorService.awaitTermination(10, TimeUnit.SECONDS)) {
-                executorService.shutdownNow();
+                executorService.shutdown();
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

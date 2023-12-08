@@ -35,7 +35,6 @@ public class Animal implements WorldElement{
         return this.position.equals(position);
     }
 
-    // TODO dopytac!
     public void move(MoveDirection direction, MoveValidator moveValidator) throws PositionAlreadyOccupiedException{
         Vector2d newPosition = this.position;
         switch (direction){

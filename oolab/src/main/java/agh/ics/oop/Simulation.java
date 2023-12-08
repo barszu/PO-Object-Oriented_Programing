@@ -2,7 +2,6 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.*;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
-import agh.ics.oop.model.listeners_observers.ConsoleMapDisplay;
 import agh.ics.oop.model.models.Animal;
 import agh.ics.oop.model.models.MoveDirection;
 import agh.ics.oop.model.models.Vector2d;
@@ -28,7 +27,7 @@ public class Simulation extends Thread {
         this.animalsList = new ArrayList<>(); //as normal list because we will pick el from the middle
         this.worldMap = worldMap;
 
-        this.worldMap.addObserver(new ConsoleMapDisplay());
+
 
         for (Vector2d position: positionsList){
             Animal animal = new Animal(position);

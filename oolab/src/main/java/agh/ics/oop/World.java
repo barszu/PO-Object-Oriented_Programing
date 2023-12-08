@@ -2,14 +2,14 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.GrassField;
 import agh.ics.oop.model.RectangularMap;
-import agh.ics.oop.model.listeners_observers.ConsoleMapDisplay;
+import agh.ics.oop.model.observers.ConsoleMapDisplay;
 import agh.ics.oop.model.models.Vector2d;
 import agh.ics.oop.model.models.MoveDirection;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class World extends Thread{
+public class World {
 
     public static void main(String[] main_args) {
         System.out.println("system wystartowal");
@@ -25,13 +25,15 @@ public class World extends Thread{
 
         ArrayList<Simulation> simulations = new ArrayList<Simulation>();
         //GrassField Generator
-        for(int i = 0; i < 3000; i++) {
+        for(int i = 0; i < 1000; i++) {
             GrassField mapGrassField = new GrassField(10);
+            mapGrassField.addObserver(new ConsoleMapDisplay());
             simulations.add(new Simulation(directions, positions, mapGrassField));
         }
         //RectangularMap Generator
         for(int i = 0; i < 1; i++) {
             RectangularMap mapRectangularMap = new RectangularMap(10, 10);
+            mapRectangularMap.addObserver(new ConsoleMapDisplay());
             simulations.add(new Simulation(directions, positions, mapRectangularMap));
         }
 

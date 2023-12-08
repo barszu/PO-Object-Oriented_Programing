@@ -4,7 +4,7 @@ import agh.ics.oop.model.models.Animal;
 import agh.ics.oop.model.models.MoveDirection;
 import agh.ics.oop.model.models.Vector2d;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
-import agh.ics.oop.model.listeners_observers.MapChangeListener;
+import agh.ics.oop.model.observers.MapChangeListener;
 import agh.ics.oop.model.models.WorldElement;
 
 import java.util.Collection;
