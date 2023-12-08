@@ -28,7 +28,6 @@ public class Simulation extends Thread {
         this.worldMap = worldMap;
 
 
-
         for (Vector2d position: positionsList){
             Animal animal = new Animal(position);
             try {

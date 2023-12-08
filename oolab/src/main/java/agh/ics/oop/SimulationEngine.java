@@ -7,8 +7,11 @@ import java.util.concurrent.TimeUnit;
 
 public class SimulationEngine {
     private final ArrayList<Simulation> simulations;
+    private final ExecutorService executorService;
+
     SimulationEngine(ArrayList<Simulation> simulations) {
         this.simulations = simulations;
+        this.executorService = Executors.newFixedThreadPool(4);
     }
 
     public void runSync() {
@@ -16,33 +19,28 @@ public class SimulationEngine {
             simulation.run();
         }
     }
-    public synchronized void runASync() {
+    public void runASync() {
         for(Simulation simulation : this.simulations) {
             simulation.start();
-            awaitSimulationsEnd(simulation);
         }
     }
 
-    public void awaitSimulationsEnd(Simulation simulation) {
+    public void awaitSimulationsEnd() throws InterruptedException{
+        for(Simulation simulation1 : this.simulations) {
+            simulation1.join();
+        }
         try {
-            simulation.join();
+            executorService.awaitTermination(10L, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
     }
 
     public synchronized void runAsyncInThreadPool() {
-        ExecutorService executorService = Executors.newFixedThreadPool(4);
         for(Simulation simulation : this.simulations) {
             executorService.submit(simulation);
         }
         executorService.shutdown();
-        try {
-            if (!executorService.awaitTermination(10, TimeUnit.SECONDS)) {
-                executorService.shutdown();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

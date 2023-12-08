@@ -24,16 +24,17 @@ public class World {
 //        simulation.run();
 
         ArrayList<Simulation> simulations = new ArrayList<Simulation>();
+        ConsoleMapDisplay consoleMapDisplay = new ConsoleMapDisplay();
         //GrassField Generator
-        for(int i = 0; i < 1000; i++) {
+        for(int i = 0; i < 300; i++) {
             GrassField mapGrassField = new GrassField(10);
-            mapGrassField.addObserver(new ConsoleMapDisplay());
+            mapGrassField.addObserver(consoleMapDisplay);
             simulations.add(new Simulation(directions, positions, mapGrassField));
         }
         //RectangularMap Generator
         for(int i = 0; i < 1; i++) {
             RectangularMap mapRectangularMap = new RectangularMap(10, 10);
-            mapRectangularMap.addObserver(new ConsoleMapDisplay());
+            mapRectangularMap.addObserver(consoleMapDisplay);
             simulations.add(new Simulation(directions, positions, mapRectangularMap));
         }
 
@@ -41,6 +42,13 @@ public class World {
         SimulationEngine engine = new SimulationEngine(simulations);
 //        engine.runASync();
         engine.runAsyncInThreadPool();
+        try {
+            engine.awaitSimulationsEnd();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
 
         System.out.println("system zakonczyl dzialanie");
 
