@@ -58,6 +58,11 @@ public class Simulation extends Thread {
             animalIdx ++ ;
             if (animalIdx >= this.animalsList.size()){
                 animalIdx = 0 ; //reset idx for repetition
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
 
         }
