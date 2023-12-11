@@ -9,7 +9,7 @@ public class SimulationEngine {
     private final ArrayList<Simulation> simulations;
     private final ExecutorService executorService;
 
-    SimulationEngine(ArrayList<Simulation> simulations) {
+    public SimulationEngine(ArrayList<Simulation> simulations) {
         this.simulations = simulations;
         this.executorService = Executors.newFixedThreadPool(4);
     }
