@@ -90,7 +90,7 @@ abstract class AbstractWorldMap implements WorldMap{
         if (mapBoundaryRepr == null){ //some __repr__
             return mapVis.draw(new Vector2d(0,0),new Vector2d(1,1));
         }
-        return mapVis.draw(mapBoundaryRepr.lowerLeft() , mapBoundaryRepr.topRight() );
+        return mapVis.draw(mapBoundaryRepr.lowerLeft() , mapBoundaryRepr.upperRight() );
     }
 
     // observers section
