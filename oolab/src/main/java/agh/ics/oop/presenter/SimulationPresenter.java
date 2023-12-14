@@ -22,15 +22,15 @@ import java.util.List;
 public class SimulationPresenter implements MapChangeListener {
 
     private WorldMap worldMap;
-//    private GridMapDrawer gridMapDrawer;
+    private GridMapDrawer gridMapDrawer;
 
     public void setWorldMap(WorldMap worldMap) {
         this.worldMap = worldMap;
     }
 
-//    public void setGridMapDrawer(GridMapDrawer gridMapDrawer) {
-//        this.gridMapDrawer = gridMapDrawer;
-//    }
+    public void setGridMapDrawer(GridMapDrawer gridMapDrawer) {
+        this.gridMapDrawer = gridMapDrawer;
+    }
 
     @FXML
     private Label infoLabel;
@@ -43,7 +43,7 @@ public class SimulationPresenter implements MapChangeListener {
     @FXML
     private GridPane mapGrid;
     @FXML
-    public void drawMap() { //setter for infoLabel
+    public void drawMap() { //setter for infoLabel?
         System.out.println("drawMap w SimulationPresenter zadzialalo");
         infoLabel.setText(worldMap.toString());
     }
@@ -52,7 +52,6 @@ public class SimulationPresenter implements MapChangeListener {
     public void mapChanged(WorldMap worldMap, String message) {
         Platform.runLater(() -> {
 //            drawMap();
-            GridMapDrawer gridMapDrawer = new GridMapDrawer(mapGrid, worldMap);
             moveInfoLabel.setText(message);
             gridMapDrawer.draw();
             System.out.println("zmieniono mape");
@@ -75,7 +74,7 @@ public class SimulationPresenter implements MapChangeListener {
         List<Vector2d> positionsList = List.of(new Vector2d(2, 2) , new Vector2d(20,20));
         Simulation simulation = new Simulation(movesList, positionsList, worldMap);
 
-//        setGridMapDrawer(new GridMapDrawer(mapGrid, worldMap));
+        setGridMapDrawer(new GridMapDrawer(mapGrid, worldMap));
 
         SimulationEngine simulationEngine = new SimulationEngine(new ArrayList<>(List.of(simulation)));
 //        simulationEngine.runAsyncInThreadPool();
