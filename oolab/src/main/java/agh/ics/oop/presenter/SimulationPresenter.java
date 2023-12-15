@@ -59,11 +59,7 @@ public class SimulationPresenter implements MapChangeListener {
     }
 
     public void onSimulationStartClicked(ActionEvent actionEvent) {
-        try {
-            startSimulation();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+       startSimulation();
     }
 
     private void startSimulation() {

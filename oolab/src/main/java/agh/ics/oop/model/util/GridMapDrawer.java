@@ -18,7 +18,7 @@ public class GridMapDrawer {
     private final WorldMap map;
 
     private Boundary boundary;
-    public void setNewBoundary() {
+    public void updateBoundary() {
         this.boundary = map.getCurrentBounds();
     }
     public GridMapDrawer(GridPane mapGrid, WorldMap map) {
@@ -27,7 +27,7 @@ public class GridMapDrawer {
     }
 
     public void draw() {
-        setNewBoundary();
+        updateBoundary();
         System.out.print(map);
 
         clearGrid();
