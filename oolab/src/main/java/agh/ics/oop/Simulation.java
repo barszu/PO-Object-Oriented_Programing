@@ -1,12 +1,16 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.*;
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
+import agh.ics.oop.model.models.Animal;
+import agh.ics.oop.model.models.MoveDirection;
+import agh.ics.oop.model.models.Vector2d;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
-public class Simulation {
+public class Simulation extends Thread {
     private final List<MoveDirection> directionsList; //moves for animals
 
     public List<Animal> getAnimalsList() {
@@ -18,18 +22,20 @@ public class Simulation {
     private final WorldMap worldMap;
 
     //for rectangular map
-    public Simulation(List<MoveDirection> directionsList , List<Vector2d> positionsList , RectangularMap worldMap ){
+    public Simulation(List<MoveDirection> directionsList , List<Vector2d> positionsList , WorldMap worldMap ){
         this.directionsList = directionsList; //as link list
         this.animalsList = new ArrayList<>(); //as normal list because we will pick el from the middle
         this.worldMap = worldMap;
 
-        for (Vector2d position: positionsList){
-            if (this.worldMap.canMoveTo(position)){ //pos in bound
-                Animal animal = new Animal(position);
-                if (worldMap.place(animal)){
-                    animalsList.add(animal);
-                }
 
+        for (Vector2d position: positionsList){
+            Animal animal = new Animal(position);
+            try {
+                worldMap.place(animal);
+                animalsList.add(animal);
+            } catch (PositionAlreadyOccupiedException e) {
+                //nothing to do
+                System.out.println("WARNING: (Animal placing was skipped) when placing Animal: " + e.getMessage());
 
             }
 
@@ -46,16 +52,28 @@ public class Simulation {
             this.worldMap.move(animal,direction);
 //            System.out.print(this.worldMap.toString());
 
-            System.out.println("Zwierze %d: %s".formatted(animalIdx , animal.toString() ));
+//            System.out.println("Zwierze %d: %s".formatted(animalIdx , animal.toString() ));
 //            System.out.println("Zwierze %d: %s".formatted(animalIdx , animalReference.getPosition().toString() ));
 
             animalIdx ++ ;
             if (animalIdx >= this.animalsList.size()){
                 animalIdx = 0 ; //reset idx for repetition
+//                try {
+//                    Thread.sleep(1500);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+            }
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                return;
             }
 
         }
 
-        System.out.print(this.worldMap.toString());
+
+//        System.out.print(this.worldMap.toString());
     }
 }

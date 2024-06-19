@@ -1,6 +1,6 @@
 package agh.ics.oop.model.util;
 
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.models.Vector2d;
 import agh.ics.oop.model.WorldMap;
 
 /**
@@ -34,7 +34,6 @@ public class MapVisualizer {
      * @return String representation of the selected region of the map.
      */
 
-    //TODO nie dziala
     public String draw(Vector2d lowerLeft, Vector2d upperRight) {
         StringBuilder builder = new StringBuilder();
         for (int i = upperRight.getY() + 1; i >= lowerLeft.getY() - 1; i--) {

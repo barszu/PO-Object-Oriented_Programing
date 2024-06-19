@@ -1,6 +1,6 @@
 package agh.ics.oop.my_package;
 
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.models.Vector2d;
 
 //my own class for easy check if point (Animal.position) is in the Word map
 //and for global settings -> if I decide to change map size

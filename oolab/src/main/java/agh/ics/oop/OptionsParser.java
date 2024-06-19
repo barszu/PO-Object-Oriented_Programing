@@ -1,6 +1,6 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.MoveDirection;
+import agh.ics.oop.model.models.MoveDirection;
 
 
 import java.util.LinkedList;
@@ -19,7 +19,7 @@ public class OptionsParser {
                 case "b" -> directions.add(MoveDirection.BACKWARD);
                 case "l" -> directions.add(MoveDirection.LEFT);
                 case "r" -> directions.add(MoveDirection.RIGHT);
-                // default -> do nothing
+                default -> throw new IllegalArgumentException("'" + arg + "'" + " is not a legal move specification");
             }
         }
         return directions;

@@ -1,4 +1,4 @@
-package agh.ics.oop.model;
+package agh.ics.oop.model.models;
 
 import java.util.Objects;
 
@@ -11,6 +11,11 @@ public class Vector2d {
     public Vector2d(int x , int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public Vector2d() {
+        this.x = 0;
+        this.y = 0;
     }
 
     public int getX() {
@@ -33,6 +38,14 @@ public class Vector2d {
        return ((this.x >= other.x)&&(this.y >= other.y));
    }
 
+    public boolean isUpLeftRespectTo(Vector2d other){
+        return ((other.x >= this.x)&&(other.y <= this.y ));
+    }
+
+    public boolean isDownRightRespectTo(Vector2d other){
+        return (( other.x <= this.x )&&( other.y >= this.y ));
+    }
+
    public Vector2d add(Vector2d other){
         return new Vector2d(this.x + other.x , this.y + other.y);
    }
@@ -53,7 +66,7 @@ public class Vector2d {
         return new Vector2d(-this.x , -this.y);
    }
 
-   public boolean equals(Object other){
+    public boolean equals(Object other){
        if (this == other)
            return true;
        if (!(other instanceof Vector2d))
@@ -65,18 +78,6 @@ public class Vector2d {
     public int hashCode(){
         return Objects.hash(this.x, this.y);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
