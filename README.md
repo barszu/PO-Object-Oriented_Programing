@@ -4,6 +4,8 @@
 The aim of the labs was to learn the basics of Java through practical project development
 (Animal Game) 🎮
 
+### [PL version](https://github.com/barszu/PO_2023_PT0940_SZUBIAK/blob/main/README_pl.md) 
+
 ## 👨‍💻 Author
 
 Bartłomiej Szubiak
