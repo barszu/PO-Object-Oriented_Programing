@@ -140,7 +140,7 @@ class SimulationTestRectangularMap {
         String[] args = {"f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","l"};
         List<MoveDirection> movesList = OptionsParser.parse(args);
         List<Vector2d> positionsList = List.of(new Vector2d(0, 1));
-        RectangularMap worldMap = new RectangularMap(0,100);
+        RectangularMap worldMap = new RectangularMap(1,100);
 
         Simulation simulation = new Simulation(movesList, positionsList, worldMap);
 

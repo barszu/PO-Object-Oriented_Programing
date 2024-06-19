@@ -10,6 +10,8 @@ public class RectangularMap extends AbstractWorldMap{
     private final int width;
     private final int height;
 
+    private final MapVisualizer mapVis;
+
 
     public RectangularMap(int width, int height) {
         super(UUID.randomUUID());
